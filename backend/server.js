@@ -5,10 +5,10 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-//require our route files
-const usersRouter = require('./routes/users');
-const videosRouter = require('./routes/videos');
-const AuthRouter = require('./routes/auth');
+// //require our route files
+// const usersRouter = require('./routes/users');
+// const videosRouter = require('./routes/videos');
+// const AuthRouter = require('./routes/auth');
 
 
 const path = require('path');
@@ -34,9 +34,9 @@ connection.on("error", err => {
 });
 
 // Add routes file
-app.use('/users', usersRouter);
-app.use('/videos', videosRouter);
-app.use('/auth', AuthRouter);
+// app.use('/users', usersRouter);
+// app.use('/videos', videosRouter);
+// app.use('/auth', AuthRouter);
 
 // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === 'production') {
