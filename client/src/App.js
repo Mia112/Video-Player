@@ -1,32 +1,41 @@
-import React, { Component} from "react";
-import Navbar from "./components/navbar";
-import { BrowserRouter as Router} from "react-router-dom";
+import React, { Component } from 'react';
+import youtube from './api/Youtube';
+import { Grid } from '@material-ui/core';
+import { SearchBar,  VideoDetail } from './components';
 
-import axios from "axios";
-
-export class App extends Component {
-  state = {
-    videos: [],
-  };
-
-  videoSearch = async text => {
-    this.setState({ loading: true });
-    const res = await axios.get(
-      `https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBMZ252IILNsA0F0h50rbZAIoorxw6cJBQ=0&maxResults=10`
-    );
-    this.setState({ videos: res.data.items});
-  };
-
+class App extends Component {
+  handleSubmit = async (searchTerm) => {
+    const response = await youtube.get('search', {
+    params: {
+      part: 'snippet',
+      maxResults: 5,
+      key: 'AIzaSyDg7arbjgsAKEij1dEAJONeKoNFX005rbs',
+      q: searchTerm
+    }
+  });
+    console.log(response.data.items);
+  }
   render() {
-    const {videos} = this.state;
     return (
-      <Router>
-        <div>
-          <Navbar />
-        </div>
-      </Router>
+    <Grid justify="center" container spacing={8}>
+      <Grid item xs={12}>
+        <Grid container spacing={8}>
+          <Grid item xs={12}>
+           <SearchBar onFormSubmit={this.handleSubmit} />
+          </Grid>
+          <Grid item xs={8}>
+          <VideoDetail />
+          </Grid>
+          <Grid item xs={4}>
+           {/* VIDEO LIST */}
+          </Grid>
+          
+        </Grid>
+      </Grid>
+    </Grid>
     );
   }
-}
-
+};
 export default App;
+
+
