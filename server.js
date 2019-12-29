@@ -1,20 +1,11 @@
 const express = require('express');
-//create our express server
+const routes = require('./routes');
 const app = express();
-
-require('dotenv').config();
 const mongoose = require('mongoose');
-
-// //require our route files
-// const usersRouter = require('./routes/users');
-// const videosRouter = require('./routes/videos');
-// const AuthRouter = require('./routes/auth');
-
-
-const path = require('path');
+require('dotenv').config();
 
 //port the server is going to be on
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // Define our middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -32,11 +23,7 @@ connection.once('connected', () => {
 connection.on("error", err => {
   console.log("Mongoose default connection error: " + err);
 });
-
-// Add routes file
-// app.use('/users', usersRouter);
-// app.use('/videos', videosRouter);
-// app.use('/auth', AuthRouter);
+app.use(routes);
 
 // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === 'production') {
