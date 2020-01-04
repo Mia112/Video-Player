@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const app = express();
+const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -26,13 +27,13 @@ connection.on("error", err => {
 app.use(routes);
 
 // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static( 'client/build'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static( 'client/build'));
 
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-//   });
-// }
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // Start the API server
 app.listen(PORT, function() {
