@@ -17,6 +17,12 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  tokens:[{
+    token:{
+        type:String,
+        required: true
+    }
+}],
   register_date: {
     type: Date,
     default: Date.now
