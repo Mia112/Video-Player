@@ -1,29 +1,33 @@
 const express = require('express');
-const routes = require('./routes');
 const app = express();
 const mongoose = require('mongoose');
-require('dotenv').config();
+const db = require("./models");
+const path = require('path');
 
-//port the server is going to be on
-const PORT = process.env.PORT || 8080;
-
+const UsersController = require("./controllers/users");
+const AuthController = require("./controllers/auth");
+require("dotenv").config();
 // Define our middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Connect to the Mongo DB
+mongoose.set("useCreateIndex", true);
+
 const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(uri, { useNewUrlParser: true });
 
 const connection = mongoose.connection;
-connection.once('connected', () => {
+connection.on('connected', () => {
   console.log('Database connection successfully');
 });
 connection.on("error", err => {
   console.log("Mongoose default connection error: " + err);
 });
-app.use(routes);
+// app.use(routes);
+
+app.use('/api/users', UsersController);
+app.use('/api/auth', AuthController);
 
 // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === 'production') {
@@ -33,10 +37,9 @@ app.use(routes);
 //     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 //   });
 // }
-
-// Start the API server
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`🌎 ==> API Server now listening on PORT ${PORT}!`);
 });
 
 

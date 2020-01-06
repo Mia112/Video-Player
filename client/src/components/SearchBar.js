@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Paper, TextField } from '@material-ui/core';
+import { MDBBtn, MDBContainer, MDBFormInline } from "mdbreact";
+
 class SearchBar extends Component {
     state = {
         searchTerm: '',
@@ -8,7 +9,7 @@ class SearchBar extends Component {
         this.setState({ searchTerm: event.target.value });
     }
     handleSubmit = (event) => {
-        // destructuring
+      
         const { searchTerm } = this.state;
         const { onFormSubmit } = this.props;
 
@@ -18,12 +19,20 @@ class SearchBar extends Component {
     }
     render() {
         return (
-            <Paper elevation={6} style={{ padding: '25px'}}>
-                <form onSubmit={this.handleSubmit}>
-                <TextField fullWidth label='Search Video' onChange={this.handleChange} />
+        
+            <MDBContainer>
+            <MDBFormInline id="searchbar" className="md-form mr-auto mb-4">
+            <form onSubmit={this.handleSubmit}>
+                <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"  onChange={this.handleChange} />
                 
                 </form>
-            </Paper>
+                <MDBBtn outline color="black" rounded size="sm" type="submit" className="mr-auto">
+          Search
+        </MDBBtn>
+          
+            </MDBFormInline>
+            </MDBContainer>
+          
         );
     }
 };

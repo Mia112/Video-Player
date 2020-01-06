@@ -1,0 +1,9 @@
+{
+  "MONGODB_URI": "mongodb+srv://mia:Password123@cluster0-jec8f.mongodb.net/test?retryWrites=true&w=majority",
+
+    "jwtSecret": "sl_myJwtSecret"
+  }
+
+  
+
+

@@ -1,4 +1,4 @@
 module.exports = {
     // Video: require('./video'),
-    User: require('./user')
+    User: require('./users')
   };

@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import youtube from './api/Youtube';
 import { Grid } from '@material-ui/core';
-import { SearchBar,  VideoDetail, VideoList } from './components';
-import './index.css';
+import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
+import { BrowserRouter as Router } from "react-router-dom";
+import "./index.css";
+
+import { Provider } from "react-redux";
+import store from "./store";
+import { loadUser } from './actions/authActions';
 
 class App extends Component {
   state = {
@@ -10,6 +15,7 @@ class App extends Component {
     selectedVideo: null,
   }
 componentDidMount() {
+  store.dispatch(loadUser());
   this.handleSubmit('React tutorials')
 }
 
@@ -32,13 +38,14 @@ componentDidMount() {
   render() {
     const {selectedVideo, videos } = this.state;
     return (
-    
+      
+      <Provider store={store}>
+      <Router>
+      <AppNavbar />
     <Grid justify="center" container spacing={8}>
-      <Grid item xs={12}>
+      <Grid item xs={10}>
         <Grid container spacing={8}>
-          <Grid item xs={12}>
-           <SearchBar onFormSubmit={this.handleSubmit} />
-          </Grid>
+         
           <Grid item xs={8}>
           <VideoDetail video={selectedVideo}/>
           </Grid>
@@ -49,6 +56,8 @@ componentDidMount() {
         </Grid>
       </Grid>
     </Grid>
+    </Router>
+   </Provider>
     );
   }
 };
