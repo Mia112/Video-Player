@@ -33,16 +33,19 @@ router.post('/', (req, res) => {
                 token,
                 user: {
                   id: user.id,
+                  name: user.name,
                   username: user.username
                 }
               });
             }
           )
         })
-    })
+        .catch(err);
+    });
 });
 
-router.get('/user', auth, (req, res) => {
+
+router.get('/users', auth, (req, res) => {
   db.User.findById(req.user.id)
     .select('-password')
     .then(user => res.json(user));

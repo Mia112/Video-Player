@@ -1,21 +1,20 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const db = require("./models");
 const path = require('path');
 
 const UsersController = require("./controllers/users");
 const AuthController = require("./controllers/auth");
 require("dotenv").config();
-// Define our middleware here
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.set("useCreateIndex", true);
 
-const uri = process.env.MONGODB_URI;
+const uri = "mongodb+srv://dbMia:mia123@cluster0-kch9q.mongodb.net/test?retryWrites=true&w=majority";
 
-mongoose.connect(uri, { useNewUrlParser: true });
+mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const connection = mongoose.connection;
 connection.on('connected', () => {
@@ -37,7 +36,7 @@ app.use('/api/auth', AuthController);
 //     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 //   });
 // }
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
   console.log(`🌎 ==> API Server now listening on PORT ${PORT}!`);
 });

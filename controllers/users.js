@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
@@ -6,17 +7,18 @@ const jwt = require('jsonwebtoken');
 const db = require("../models");
 
 router.post('/', (req, res) => {
-  const { username, password } = req.body;
+  const { name, username, password } = req.body;
 
-  if(!username || !password) {
+  if(!name || !username || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
-
+  
   db.User.findOne({ username })
     .then(user => {
       if(user) return res.status(400).json({ msg: 'User already exists' });
 
       const newUser = new User({
+        name,
         username,
         password
       });
@@ -38,6 +40,7 @@ router.post('/', (req, res) => {
                     token,
                     user: {
                       id: user.id,
+                      name: user.name,
                       username: user.username
                     }
                   });
@@ -46,6 +49,7 @@ router.post('/', (req, res) => {
             });
         })
       })
+      .catch(err);
     })
 });
 

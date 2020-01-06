@@ -51,7 +51,7 @@ class LoginModal extends Component {
   }
 
   toggle = () => {
-    // Clear errors
+
     this.props.clearErrors();
     this.setState({
       modal: !this.state.modal
@@ -59,7 +59,7 @@ class LoginModal extends Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.username]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
@@ -72,7 +72,6 @@ class LoginModal extends Component {
       password
     };
 
-    // Attempt to login
     this.props.login(user);
   };
 
