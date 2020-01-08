@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 const path = require('path');
+const mongoose = require('mongoose');
 const UsersController = require("./controllers/users");
 const AuthController = require("./controllers/auth");
 require("dotenv").config();
