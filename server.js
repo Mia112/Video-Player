@@ -2,13 +2,15 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
-
 const UsersController = require("./controllers/users");
 const AuthController = require("./controllers/auth");
 require("dotenv").config();
-
+const cors = require('cors');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(cors());
+
 
 mongoose.set("useCreateIndex", true);
 
@@ -25,17 +27,19 @@ connection.on("error", err => {
 });
 // app.use(routes);
 
-app.use('/api/users', UsersController);
+app.use('/api/User', UsersController);
 app.use('/api/auth', AuthController);
 
 // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static( 'client/build'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static( 'client/build'));
 
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-//   });
-// }
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+};
+
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
   console.log(`🌎 ==> API Server now listening on PORT ${PORT}!`);

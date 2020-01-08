@@ -4,22 +4,29 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+
+// User Model
 const db = require("../models");
 
+// @route   POST api/users
+// @desc    Register new user
+// @access  Public
 router.post('/', (req, res) => {
-  const { name, username, password } = req.body;
+  const { name, email, password } = req.body;
 
-  if(!name || !username || !password) {
+  // Simple validation
+  if(!name || !email || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
-  
-  db.User.findOne({ username })
+
+  // Check for existing user
+  db.User.findOne({ email })
     .then(user => {
       if(user) return res.status(400).json({ msg: 'User already exists' });
 
       const newUser = new User({
         name,
-        username,
+        email,
         password
       });
 
@@ -41,7 +48,7 @@ router.post('/', (req, res) => {
                     user: {
                       id: user.id,
                       name: user.name,
-                      username: user.username
+                      email: user.email
                     }
                   });
                 }
@@ -49,7 +56,6 @@ router.post('/', (req, res) => {
             });
         })
       })
-      .catch(err);
     })
 });
 

@@ -1,0 +1,221 @@
+* {
+  padding: 0;
+  margin: 0;
+
+}
+#topnav {
+  background-color: rgb(72, 1, 1);
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link {
+  color: rgb(3, 3, 3);
+  -webkit-transition: .35s;
+  -o-transition: .35s;
+  transition: .35s;
+  margin-top: 0px;
+}
+.navbar .nav-item {
+    padding-right: 6px;
+    padding-left: 6px; 
+}
+.col-sm-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    background-color: rgb(72, 1, 1);
+}
+
+form.search {
+    overflow: auto;
+    margin-bottom: 10px;
+  }
+  /* #main {
+    overflow: hidden;
+  
+  } */
+  .list {
+    overflow: scroll;
+  }
+  
+
+
+.list {
+  height:500px;
+  overflow:scroll;
+  overflow-x:hidden;
+}
+.card-title {
+  background-color: rgb(255, 255, 255);
+  color: rgb(51, 4, 4);
+  font-size: 20px;;
+}
+
+.jumbotron {
+  /* padding: 0; 
+  margin: 2rem; */
+   background-color: rgb(255, 255, 255);
+  /* border-radius: .3rem; */
+  position: center;
+  /* margin: 10px; */
+}
+
+.drink-list {
+  overflow: scroll;
+}
+
+.card-body {
+  margin: 10px;
+  overflow: scroll;
+}
+
+.main-hr {
+  width: 30%;
+  border: none;
+  border-top: 1px solid #c3c3c3;
+}
+.icon-btn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+}
+
+.add-btn {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background: red;
+}
+
+.add-btn{
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.icon-btn:focus {
+  outline: none;
+}
+.row {
+  margin: 0;
+}
+
+.add-icon {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: red;
+  overflow: hidden;
+}
+.add-icon{
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.add-btn .add-icon{
+  left: 15px;
+  height: 3px;
+  top: calc(50% - 2px);
+}
+
+
+
+.general-btn {
+
+	background-color:#4b0202ee;
+	border-radius:42px;
+  display:inline-block;
+  margin-top:10px;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+	padding:10px 15px;
+	text-decoration:none;
+	
+}
+.general-btn:hover {
+	background-color:#757575;
+}
+.general-btn:active {
+	position:relative;
+  background-color:#f5f5f5ee;
+  color: #300c08;
+  
+}
+
+a {
+  text-decoration:none;
+}
+
+
+
+/* *****************LBARS/MAP PAGE STYLING*********************************** */
+
+.bar-name {
+  color: #300c08;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  
+}
+
+
+
+
+
+
+
+/* *****************SEARCH/ORDER DRINKS PAGE STYLING*********************************** */
+
+#quantity {
+  color:rgb(51, 4, 4);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#eact-row {
+position: relative;
+width: 100%;
+padding-top:0px;
+padding-left: 0px;
+}
+
+#drink-content {
+  margin-top: 10px;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 18%;
+}
+
+.btn-outline-mdb-color {
+  border: 2px solid rgb(51, 4, 4);;
+  background-color: white;
+  color: rgb(51, 4, 4);;
+}
+
+
+
+/* *****************EDIT/ORDER DRINKS PAGE STYLING*********************************** */
+
+.edit-btn {
+  display: inline-block;
+  width: 150px;
+  
+  padding:0px 4px;
+}
+
+
+.clearfix {
+  overflow: auto;
+}

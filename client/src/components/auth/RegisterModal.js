@@ -20,7 +20,7 @@ class RegisterModal extends Component {
   state = {
     modal: false,
     name: '',
-    username: '',
+    email: '',
     password: '',
     msg: null
   };
@@ -66,18 +66,17 @@ class RegisterModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, username, password } = this.state;
+    const { name, email, password } = this.state;
 
     // Create user object
     const newUser = {
       name,
-      username,
+      email,
       password
     };
-console.log(newUser);
+
     // Attempt to register
     this.props.register(newUser);
-  
   };
 
   render() {
@@ -95,20 +94,22 @@ console.log(newUser);
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-              <Label for='name'>Name</Label>
-              <Input
-                type='text'
-                name='name'
-                id='name'
-                className='mb-3'
-                onChange={this.onChange}
-              />
-          
-                <Label for='username'>Username</Label>
+                <Label for='name'>Name</Label>
                 <Input
-                  type='username'
-                  name='username'
-                  id='username'
+                  type='text'
+                  name='name'
+                  id='name'
+                  placeholder='Name'
+                  className='mb-3'
+                  onChange={this.onChange}
+                />
+
+                <Label for='email'>Email</Label>
+                <Input
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='Email'
                   className='mb-3'
                   onChange={this.onChange}
                 />
@@ -118,6 +119,7 @@ console.log(newUser);
                   type='password'
                   name='password'
                   id='password'
+                  placeholder='Password'
                   className='mb-3'
                   onChange={this.onChange}
                 />

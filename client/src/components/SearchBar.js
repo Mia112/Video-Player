@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBBtn, MDBContainer, MDBFormInline } from "mdbreact";
+import { Form, FormControl, Button } from 'react-bootstrap';
 
 class SearchBar extends Component {
     state = {
@@ -19,20 +19,11 @@ class SearchBar extends Component {
     }
     render() {
         return (
+            <Form inline>
+            <FormControl onSubmit={this.handleSubmit} type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange} />
+            <Button variant="outline-success">Search</Button>
+          </Form>
         
-            <MDBContainer>
-            <MDBFormInline id="searchbar" className="md-form mr-auto mb-4">
-            <form onSubmit={this.handleSubmit}>
-                <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"  onChange={this.handleChange} />
-                
-                </form>
-                <MDBBtn outline color="black" rounded size="sm" type="submit" className="mr-auto">
-          Search
-        </MDBBtn>
-          
-            </MDBFormInline>
-            </MDBContainer>
-          
         );
     }
 };

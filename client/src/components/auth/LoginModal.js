@@ -19,7 +19,7 @@ import { clearErrors } from '../../actions/errorActions';
 class LoginModal extends Component {
   state = {
     modal: false,
-    username: '',
+    email: '',
     password: '',
     msg: null
   };
@@ -51,7 +51,7 @@ class LoginModal extends Component {
   }
 
   toggle = () => {
-
+    // Clear errors
     this.props.clearErrors();
     this.setState({
       modal: !this.state.modal
@@ -65,13 +65,14 @@ class LoginModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { username, password } = this.state;
+    const { email, password } = this.state;
 
     const user = {
-      username,
+      email,
       password
     };
 
+    // Attempt to login
     this.props.login(user);
   };
 
@@ -90,11 +91,12 @@ class LoginModal extends Component {
             ) : null}
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='username'>Username</Label>
+                <Label for='email'>Email</Label>
                 <Input
-                  type='username'
-                  name='username'
-                  id='username'
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='Email'
                   className='mb-3'
                   onChange={this.onChange}
                 />
@@ -104,6 +106,7 @@ class LoginModal extends Component {
                   type='password'
                   name='password'
                   id='password'
+                  placeholder='Password'
                   className='mb-3'
                   onChange={this.onChange}
                 />
@@ -127,4 +130,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { login, clearErrors }
-)(LoginModal);
+  )(LoginModal);
