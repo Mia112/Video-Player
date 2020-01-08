@@ -11,7 +11,6 @@ app.use(express.json());
 
 app.use(cors());
 
-
 mongoose.set("useCreateIndex", true);
 
 const uri = "mongodb+srv://dbMia:mia123@cluster0-kch9q.mongodb.net/test?retryWrites=true&w=majority";
@@ -38,7 +37,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 };
-
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
