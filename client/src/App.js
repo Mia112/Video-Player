@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import youtube from './api/Youtube';
-import { Grid } from '@material-ui/core';
-import { SearchBar,  VideoDetail, VideoList } from './components';
-import './index.css';
+import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
+import "./App.css";
+import { Provider } from "react-redux";
+import store from "./store";
+import { loadUser } from './actions/authActions';
 
 class App extends Component {
+  
   state = {
     videos: [],
     selectedVideo: null,
   }
 componentDidMount() {
+  store.dispatch(loadUser());
   this.handleSubmit('React tutorials')
+  
 }
-
   onVideoSelect = (video) => {
     this.setState({ selectedVideo: video });
 
@@ -32,23 +36,18 @@ componentDidMount() {
   render() {
     const {selectedVideo, videos } = this.state;
     return (
-    
-    <Grid justify="center" container spacing={8}>
-      <Grid item xs={12}>
-        <Grid container spacing={8}>
-          <Grid item xs={12}>
-           <SearchBar onFormSubmit={this.handleSubmit} />
-          </Grid>
-          <Grid item xs={8}>
+      <div>
+      <Provider store={store}>
+      <AppNavbar />
+      
+      <div>
+      <SearchBar onFormSubmit={this.handleSubmit} />
+      </div>
           <VideoDetail video={selectedVideo}/>
-          </Grid>
-          <Grid item xs={4}>
+         
            <VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
-          </Grid>
-          
-        </Grid>
-      </Grid>
-    </Grid>
+   </Provider>
+   </div>
     );
   }
 };

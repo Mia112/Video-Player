@@ -1,30 +1,33 @@
 const express = require('express');
-const routes = require('./routes');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-require('dotenv').config();
-
-//port the server is going to be on
-const PORT = process.env.PORT || 8080;
-
-// Define our middleware here
+const UsersController = require("./controllers/users");
+const AuthController = require("./controllers/auth");
+require("dotenv").config();
+const cors = require('cors');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Connect to the Mongo DB
-const uri = process.env.MONGODB_URI;
+app.use(cors());
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});
+mongoose.set("useCreateIndex", true);
+
+const uri = "mongodb+srv://dbMia:mia123@cluster0-kch9q.mongodb.net/test?retryWrites=true&w=majority";
+
+mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const connection = mongoose.connection;
-connection.once('connected', () => {
+connection.on('connected', () => {
   console.log('Database connection successfully');
 });
 connection.on("error", err => {
   console.log("Mongoose default connection error: " + err);
 });
-app.use(routes);
+// app.use(routes);
+
+app.use('/api/User', UsersController);
+app.use('/api/auth', AuthController);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
@@ -33,11 +36,11 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
-}
+};
 
-// Start the API server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`🌎 ==> API Server now listening on PORT ${PORT}!`);
 });
 
 
