@@ -30,7 +30,6 @@ class LoginModal extends Component {
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
-
   componentDidUpdate(prevProps) {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
@@ -41,8 +40,6 @@ class LoginModal extends Component {
         this.setState({ msg: null });
       }
     }
-
-    // If authenticated, close modal
     if (this.state.modal) {
       if (isAuthenticated) {
         this.toggle();
@@ -51,7 +48,6 @@ class LoginModal extends Component {
   }
 
   toggle = () => {
-    // Clear errors
     this.props.clearErrors();
     this.setState({
       modal: !this.state.modal
@@ -64,15 +60,11 @@ class LoginModal extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const { email, password } = this.state;
-
     const user = {
       email,
       password
     };
-
-    // Attempt to login
     this.props.login(user);
   };
 
@@ -96,22 +88,19 @@ class LoginModal extends Component {
                   type='email'
                   name='email'
                   id='email'
-                  placeholder='Email'
                   className='mb-3'
                   onChange={this.onChange}
                 />
-
                 <Label for='password'>Password</Label>
                 <Input
                   type='password'
                   name='password'
                   id='password'
-                  placeholder='Password'
                   className='mb-3'
                   onChange={this.onChange}
                 />
-                <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Login
+                <Button color='light' style={{ marginTop: '2rem' }} block>
+                  Submit
                 </Button>
               </FormGroup>
             </Form>

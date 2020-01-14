@@ -1,6 +1,5 @@
 import React from 'react';
 import VideoItem from './VideoItem'
-
 const VideoList = ({videos, onVideoSelect}) => {
   if (!videos) {
     return <div>Loading...</div>;
@@ -16,7 +15,7 @@ const VideoList = ({videos, onVideoSelect}) => {
   });
 
   return (
-    <ul className="col-md-4 list-group">
+    <ul>
       { videoItems }
     </ul>
   );

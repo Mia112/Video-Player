@@ -3,3 +3,4 @@ export { default as VideoDetail } from './VideoDetail';
 export { default as VideoList } from './VideoList';
 export { default as AppNavbar } from './AppNavbar';
 export { default as Saved } from './Saved';
+export { default as SaveBtn } from './SaveBtn';
