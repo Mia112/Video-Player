@@ -40,11 +40,9 @@ class LoginModal extends Component {
         this.setState({ msg: null });
       }
     }
-    if (this.state.modal) {
-      if (isAuthenticated) {
-        this.toggle();
+    if(this.state.modal && isAuthenticated){
+      this.toggle();
       }
-    }
   }
 
   toggle = () => {
