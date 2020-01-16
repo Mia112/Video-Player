@@ -1,16 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Alert
-} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, NavLink, Alert} from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
@@ -24,31 +13,24 @@ class RegisterModal extends Component {
     password: '',
     msg: null
   };
-
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
-
   componentDidUpdate(prevProps) {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
-      // Check for register error
       if (error.id === 'REGISTER_FAIL') {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
       }
     }
-
-    // If authenticated, close modal
-    if (this.state.modal) {
-      if (isAuthenticated) {
-        this.toggle();
+    if(this.state.modal && isAuthenticated){
+      this.toggle();
       }
-    }
   }
 
   toggle = () => {
@@ -62,32 +44,25 @@ class RegisterModal extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
   onSubmit = e => {
     e.preventDefault();
-
     const { name, email, password } = this.state;
-
-    // Create user object
     const newUser = {
       name,
       email,
       password
     };
-
-    // Attempt to register
     this.props.register(newUser);
   };
-
   render() {
     return (
       <div>
         <NavLink onClick={this.toggle} href='#'>
-          Register
+          Sign Up
         </NavLink>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color='danger'>{this.state.msg}</Alert>
@@ -99,7 +74,6 @@ class RegisterModal extends Component {
                   type='text'
                   name='name'
                   id='name'
-                  placeholder='Name'
                   className='mb-3'
                   onChange={this.onChange}
                 />
@@ -109,7 +83,6 @@ class RegisterModal extends Component {
                   type='email'
                   name='email'
                   id='email'
-                  placeholder='Email'
                   className='mb-3'
                   onChange={this.onChange}
                 />
@@ -119,12 +92,11 @@ class RegisterModal extends Component {
                   type='password'
                   name='password'
                   id='password'
-                  placeholder='Password'
                   className='mb-3'
                   onChange={this.onChange}
                 />
-                <Button color='dark' style={{ marginTop: '2rem' }} block>
-                  Register
+                <Button color='light' style={{ marginTop: '2rem' }} block>
+                  Submit
                 </Button>
               </FormGroup>
             </Form>

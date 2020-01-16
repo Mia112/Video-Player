@@ -1,17 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
+import {Link} from 'react-router-dom';
 
 class AppNavbar extends Component {
   state = {
@@ -30,9 +24,14 @@ class AppNavbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-
     const authLinks = (
       <Fragment>
+      <NavItem>
+      <Link to="/saved"
+      className={window.location.pathname === "/saved"
+        ? "nav-link active"
+        : "nav-link"}>Saved Videos</Link>
+        </NavItem>
         <NavItem>
           <span className='navbar-text mr-3'>
             <strong>{user ? `Welcome ${user.name}` : ''}</strong>

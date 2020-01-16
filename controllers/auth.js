@@ -8,7 +8,7 @@ const auth = require('../middleware/auth');
 const db = require("../models");
 router.post('/', (req, res) => {
   const { email, password } = req.body;
-
+ 
   if(!email || !password) {
     return res.status(400).json({ msg: 'Please enter all fields' });
   }
@@ -27,14 +27,14 @@ router.post('/', (req, res) => {
             { expiresIn: 3600 },
             (err, token) => {
               if(err) throw err;
-              res.json({
+             console.log(res.json({
                 token,
                 user: {
                   id: user.id,
                   name: user.name,
                   email: user.email
                 }
-              });
+              }));
             }
           )
         })

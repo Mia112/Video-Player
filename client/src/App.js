@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import youtube from './api/Youtube';
-import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
+import youtube from './API/Youtube';
+import { Saved, SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
 import "./App.css";
+
 import { Provider } from "react-redux";
 import store from "./store";
+
 import { loadUser } from './actions/authActions';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
 
 class App extends Component {
   
@@ -12,11 +17,12 @@ class App extends Component {
     videos: [],
     selectedVideo: null,
   }
-componentDidMount() {
+
+  componentDidMount() {
   store.dispatch(loadUser());
   this.handleSubmit('React tutorials')
   
-}
+  }
   onVideoSelect = (video) => {
     this.setState({ selectedVideo: video });
 
@@ -31,24 +37,45 @@ componentDidMount() {
       q: searchTerm
     }
   });
-    this.setState({videos: response.data.items, selectedVideo: response.data.items[0] });
+   const result = this.setState({videos: response.data.items, selectedVideo: response.data.items[0] });
+  console.log(result);
   }
+
   render() {
     const {selectedVideo, videos } = this.state;
     return (
-      <div>
+      <Router>
       <Provider store={store}>
       <AppNavbar />
       
-      <div>
+      <div className='container-fluid' style={{marginTop: '1em'}}>
+      <Switch>
+      <Route
+      exact
+      path="/"
+      render={props => (
+        <>
       <SearchBar onFormSubmit={this.handleSubmit} />
-      </div>
-          <VideoDetail video={selectedVideo}/>
+      <div className='row'>
+      <div className="video-detail col-md-8">
+        
+          <VideoDetail video={selectedVideo} />
          
+         </div>
+         <div className="col-md-4 list-group">
            <VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
-   </Provider>
-   </div>
-    );
+           </div>
+           </div>
+           </>
+           )}
+         />
+           <Route exact path="/Saved" component={Saved} />
+           
+           </Switch>
+           </div>
+      </Provider>
+    </Router>
+  );
   }
 };
 export default App;

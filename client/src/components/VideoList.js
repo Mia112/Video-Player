@@ -1,6 +1,5 @@
 import React from 'react';
 import VideoItem from './VideoItem'
-
 const VideoList = ({videos, onVideoSelect}) => {
   if (!videos) {
     return <div>Loading...</div>;
@@ -11,12 +10,13 @@ const VideoList = ({videos, onVideoSelect}) => {
         onVideoSelect={ onVideoSelect }
         key={video.etag}
         video={video}
+        
       />
   );
   });
 
   return (
-    <ul className="col-md-4 list-group">
+    <ul>
       { videoItems }
     </ul>
   );

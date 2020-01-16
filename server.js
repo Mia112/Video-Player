@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const UsersController = require("./controllers/users");
-const AuthController = require("./controllers/auth");
+
+const videos = require("./controllers/video");
+const User = require("./controllers/users");
+const Auth = require("./controllers/auth");
+
 require("dotenv").config();
 const cors = require('cors');
 app.use(express.urlencoded({ extended: true }));
@@ -24,12 +27,12 @@ connection.on('connected', () => {
 connection.on("error", err => {
   console.log("Mongoose default connection error: " + err);
 });
-// app.use(routes);
 
-app.use('/api/User', UsersController);
-app.use('/api/auth', AuthController);
 
-// Serve up static assets (usually on heroku)
+app.use('/api/Video', videos);
+app.use('/api/User', User);
+app.use('/api/auth', Auth);
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static( 'client/build'));
 

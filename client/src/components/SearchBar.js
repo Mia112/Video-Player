@@ -31,10 +31,3 @@ class SearchBar extends Component {
 
 export default SearchBar;
 
-
-// <div>
-// <Form inline>
-// <FormControl onSubmit={this.handleSubmit} type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange} />
-// <Button variant="outline-success">Search</Button>
-// </Form>
-// </div>
