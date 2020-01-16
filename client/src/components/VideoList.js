@@ -10,6 +10,7 @@ const VideoList = ({videos, onVideoSelect}) => {
         onVideoSelect={ onVideoSelect }
         key={video.etag}
         video={video}
+        
       />
   );
   });

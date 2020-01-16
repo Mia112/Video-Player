@@ -60,11 +60,11 @@ class RegisterModal extends Component {
     return (
       <div>
         <NavLink onClick={this.toggle} href='#'>
-          Sign-up
+          Sign Up
         </NavLink>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Sign-up</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>
           <ModalBody>
             {this.state.msg ? (
               <Alert color='danger'>{this.state.msg}</Alert>

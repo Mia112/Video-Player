@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Mia112/Video-Player#readme",
   "dependencies": {
+    "axios": "^0.19.1",
     "bcrypt": "^3.0.7",
     "bcryptjs": "^2.4.3",
     "concurrently": "^5.0.2",

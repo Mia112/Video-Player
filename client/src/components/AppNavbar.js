@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
+import {Link} from 'react-router-dom';
 
 class AppNavbar extends Component {
   state = {
@@ -26,9 +27,10 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
       <NavItem>
-      <a className="btn btn-info" href="/Saved">
-      View Your Saved Videos
-      </a>
+      <Link to="/saved"
+      className={window.location.pathname === "/saved"
+        ? "nav-link active"
+        : "nav-link"}>Saved Videos</Link>
         </NavItem>
         <NavItem>
           <span className='navbar-text mr-3'>

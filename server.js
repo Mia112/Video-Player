@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const VideosController = require("./controllers/videos");
-const UsersController = require("./controllers/users");
-const AuthController = require("./controllers/auth");
+
+const videos = require("./controllers/video");
+const User = require("./controllers/users");
+const Auth = require("./controllers/auth");
 
 require("dotenv").config();
 const cors = require('cors');
@@ -27,9 +28,10 @@ connection.on("error", err => {
   console.log("Mongoose default connection error: " + err);
 });
 
-app.use('/api/Video', VideosController);
-app.use('/api/User', UsersController);
-app.use('/api/auth', AuthController);
+
+app.use('/api/Video', videos);
+app.use('/api/User', User);
+app.use('/api/auth', Auth);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static( 'client/build'));

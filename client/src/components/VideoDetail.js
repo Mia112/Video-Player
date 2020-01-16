@@ -1,8 +1,11 @@
 import React from "react";
+
+
 const VideoDetail = ({video}) => {
   if(!video) return <div>Loading video...</div>
   console.log(video.id.video);
   const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
+  const saved = video;
   return (
     <div className='flex-row'>
    <div className="video-detail">
@@ -11,8 +14,16 @@ const VideoDetail = ({video}) => {
    </div>
    <div className="details">
    <div>{video.snippet.title}</div>
-   <div>{video.snippet.description}
-   </div>
+   <div>{video.snippet.description}</div>
+   {saved && (
+    <a
+      href={saved}
+      className="btn btn-dark"
+      style={{ display: "inline-block", marginTop: "1rem" }}
+    >
+      Save Book
+    </a>
+  )}
  </div>
 </div>
 </div>
