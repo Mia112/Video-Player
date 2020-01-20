@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 export default {
-  saveVideo: function (videoData) {
-    return axios.post('/apisavedvideos', videoData);
-  },
+	// saveVideo: function(videoData) {
+	// 	return axios.post('/api/videos', videoData);
+	// },
 
-  getVideo: function () {
-    return axios.get('/api/savedvideos')
-  },
+	getVideo: function() {
+		return axios.get('/api/videos');
+	},
 
-  deleteVideo: function (id) {
-    return axios.delete(`/api/savedvideos/${id}`)
-  }
+	deleteVideo: function(id) {
+		return axios.delete(`/api/videos/${id}`);
+	}
 };
