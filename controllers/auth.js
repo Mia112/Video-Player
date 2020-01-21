@@ -5,46 +5,46 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 
-const db = require("../models");
+const db = require('../models');
 router.post('/', (req, res) => {
-  const { email, password } = req.body;
- 
-  if(!email || !password) {
-    return res.status(400).json({ msg: 'Please enter all fields' });
-  }
+	const { email, password } = req.body;
 
-  db.User.findOne({ email })
-    .then(user => {
-      if(!user) return res.status(400).json({ msg: 'User Does not exist' });
+	if (!email || !password) {
+		return res.status(400).json({ msg: 'Please enter all fields' });
+	}
 
-      bcrypt.compare(password, user.password)
-        .then(isMatch => {
-          if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
+	db.User.findOne({ email }).then(user => {
+		if (!user) return res.status(400).json({ msg: 'User Does not exist' });
 
-          jwt.sign(
-            { id: user.id },
-            config.get('jwtSecret'),
-            { expiresIn: 3600 },
-            (err, token) => {
-              if(err) throw err;
-             console.log(res.json({
-                token,
-                user: {
-                  id: user.id,
-                  name: user.name,
-                  email: user.email
-                }
-              }));
-            }
-          )
-        })
-    })
+		bcrypt.compare(password, user.password).then(isMatch => {
+			if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
+
+			jwt.sign(
+				{ id: user.id },
+				config.get('jwtSecret'),
+				{ expiresIn: 3600 },
+				(err, token) => {
+					if (err) throw err;
+					console.log(
+						res.json({
+							token,
+							user: {
+								id: user.id,
+								name: user.name,
+								email: user.email
+							}
+						})
+					);
+				}
+			);
+		});
+	});
 });
 
 router.get('/user', auth, (req, res) => {
-  db.User.findById(req.user.id)
-    .select('-password')
-    .then(user => res.json(user));
+	db.User.findById(req.user.id)
+		.select('-password')
+		.then(user => res.json(user));
 });
 
 module.exports = router;

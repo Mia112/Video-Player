@@ -1,33 +1,25 @@
-import React from "react";
+import React from 'react';
 
+const VideoDetail = ({ video }) => {
+	if (!video) return <div>Loading video...</div>;
+	const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
 
-const VideoDetail = ({video}) => {
-  if(!video) return <div>Loading video...</div>
-  console.log(video.id.video);
-  const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
-  const saved = video;
-  return (
-    <div className='flex-row'>
-   <div className="video-detail">
-   <div className="embed-responsive embed-responsive-16by9">
-   <iframe className="embed-responsive-item" title='Video Details' src={videoSrc}></iframe>
-   </div>
-   <div className="details">
-   <div>{video.snippet.title}</div>
-   <div>{video.snippet.description}</div>
-   {saved && (
-    <a
-      href={saved}
-      className="btn btn-dark"
-      style={{ display: "inline-block", marginTop: "1rem" }}
-    >
-      Save Book
-    </a>
-  )}
- </div>
-</div>
-</div>
-);
-}
+	return (
+		<div className='flex-row'>
+			<div className='video-detail'>
+				<div className='embed-responsive embed-responsive-16by9'>
+					<iframe
+						className='embed-responsive-item'
+						title='Video Details'
+						src={videoSrc}></iframe>
+				</div>
+				<div className='details'>
+					<div>{video.snippet.title}</div>
+					<div>{video.snippet.description}</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default VideoDetail;
