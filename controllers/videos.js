@@ -9,7 +9,7 @@ router.get('/Video', function(req, res) {
 		.catch(err => res.status(502).json(err));
 });
 
-router.post('/', function(req, res) {
+router.post('/', (req, res) => {
 	db.Video.create(req.body)
 		.then(dbVideos => res.json(dbVideos))
 		.catch(err => res.status(502).json(err));

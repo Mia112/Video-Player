@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import youtube from './API/Youtube';
-import axios from 'axios';
+
 import './App.css';
-import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
+import {
+	SaveVideo,
+	SearchBar,
+	AppNavbar,
+	VideoDetail,
+	VideoList
+} from './components';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -15,9 +20,7 @@ import PlayList from './components/Playlist';
 class App extends Component {
 	state = {
 		videos: [],
-		selectedVideo: null,
-		currentPlaylist: [],
-		saveVideo: null
+		selectedVideo: null
 	};
 
 	componentDidMount(props) {
@@ -29,24 +32,6 @@ class App extends Component {
 		this.setState({
 			selectedVideo: video
 		});
-	};
-
-	handleVideoSubmit = (videoId, title, description) => {
-		const newVideo = {
-			videoId,
-			title,
-			description
-		};
-
-		axios
-			.post('http://localhost:8080/api/Video', newVideo)
-
-			.then(function(response) {
-				console.log(response);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
 	};
 
 	handleSubmit = async searchTerm => {
@@ -79,7 +64,7 @@ class App extends Component {
 						<div className='row'>
 							<div className='video-detail col-md-8'>
 								<VideoDetail video={selectedVideo} />
-								<Button onClick={this.handleVideoSubmit}> Save Video </Button>
+								<SaveVideo />
 							</div>
 							<div className='col-md-4 list-group'>
 								<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
