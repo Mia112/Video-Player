@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Form, FormControl, Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import { Paper, TextField } from '@material-ui/core';
 
 class SearchBar extends Component {
@@ -22,6 +22,9 @@ class SearchBar extends Component {
 			<Paper elevation={10} style={{ padding: '50px', margin: '50px' }}>
 				<form onSubmit={this.handleSubmit}>
 					<TextField fullWidth label='Search' onChange={this.handleChange} />
+					<Button variant='outline-dark' type='submit'>
+						Search
+					</Button>
 				</form>
 			</Paper>
 		);
