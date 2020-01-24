@@ -5,36 +5,43 @@ import axios from 'axios';
 class SaveVideo extends Component {
 	state = {
 		selectedVideo: '',
-		savedVideo: null
+		saveVideo: ''
 	};
 
-	addVideo(selectedVideo) {
-		let data = this.setState({
-			savedVideo: selectedVideo
+	onVideoSave = selectedVideo => {
+		this.setState({
+			saveVideo: selectedVideo
 		});
-		axios('http://localhost:8080/api/Video', {
+	};
+	addVideo = async saveVideo => {
+		saveVideo.preventDefault();
+
+		const result = await axios('http://localhost:8080/api/Video', {
 			method: 'post',
 			mode: 'no-cors',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(result => {
-				result.json().then(res => {
-					console.log(res);
-				});
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	}
+			}
+		});
+		console.log(result);
+		this.setState({
+			videos: result.data.items,
+			selectedVideo: result.data.items[0]
+		});
+	};
+
 	render() {
+		const { saveVideo } = this.state;
 		return (
-			<div>
-				<Button onClick={() => this.addVideo()}> Save Video </Button>
-			</div>
+			<Button
+				variant='outline-dark'
+				name='Save Video'
+				type='submit'
+				value={saveVideo}
+				onClick={this.addVideo}>
+				Save Video
+			</Button>
 		);
 	}
 }

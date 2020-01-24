@@ -60,7 +60,9 @@ class App extends Component {
 						style={{
 							marginTop: '1em'
 						}}>
-						<SearchBar onFormSubmit={this.handleSubmit} />
+						<div>
+							<SearchBar onFormSubmit={this.handleSubmit} />
+						</div>
 						<div className='row'>
 							<div className='video-detail col-md-8'>
 								<VideoDetail video={selectedVideo} />

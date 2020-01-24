@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoItem from './VideoItem';
-const VideoList = ({ videos, onVideoSelect, onSaveVideo }) => {
+const VideoList = ({ videos, onVideoSelect }) => {
 	if (!videos) {
 		return <div>Loading...</div>;
 	}
