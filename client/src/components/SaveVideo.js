@@ -5,6 +5,8 @@ import axios from 'axios';
 class SaveVideo extends Component {
 	state = {
 		selectedVideo: '',
+		title: '',
+		description: '',
 		saveVideo: ''
 	};
 
@@ -25,21 +27,16 @@ class SaveVideo extends Component {
 			}
 		});
 		console.log(result);
+
 		this.setState({
-			videos: result.data.items,
-			selectedVideo: result.data.items[0]
+			videos: result.saveVideo,
+			selectedVideo: result.saveVideo
 		});
 	};
 
 	render() {
-		const { saveVideo } = this.state;
 		return (
-			<Button
-				variant='outline-dark'
-				name='Save Video'
-				type='submit'
-				value={saveVideo}
-				onClick={this.addVideo}>
+			<Button variant='outline-dark' type='submit' onClick={this.addVideo}>
 				Save Video
 			</Button>
 		);

@@ -5,14 +5,14 @@ import {
 	NavbarToggler,
 	NavbarBrand,
 	Nav,
-	NavItem
+	NavItem,
+	NavLink
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
-import { Link } from 'react-router-dom';
 
 class AppNavbar extends Component {
 	state = {
@@ -34,15 +34,9 @@ class AppNavbar extends Component {
 		const authLinks = (
 			<Fragment>
 				<NavItem>
-					<Link
-						to='/Playlist'
-						className={
-							window.location.pathname === '/Playlist'
-								? 'nav-link active'
-								: 'nav-link'
-						}>
-						Saved Videos
-					</Link>
+					<NavLink onClick={this.toggle} href='/Playlist'>
+						View Saved Video
+					</NavLink>
 				</NavItem>
 				<span className='navbar-text mr-1'>
 					<strong>{user ? `Welcome ${user.name}` : ''}</strong>
@@ -69,8 +63,7 @@ class AppNavbar extends Component {
 			<div>
 				<Navbar
 					id='topnav'
-					dark
-					expand='md'
+					expand='lg'
 					className='navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar'>
 					<NavbarBrand href='/'>
 						<h3>Youtube Video App</h3>

@@ -9,13 +9,11 @@ import {
 	VideoDetail,
 	VideoList
 } from './components';
-
+import Playlist from './components/pages/Playlist';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import PlayList from './components/Playlist';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 	state = {
@@ -49,17 +47,15 @@ class App extends Component {
 			selectedVideo: response.data.items[0]
 		});
 	};
+
 	render() {
 		const { selectedVideo, videos } = this.state;
 		return (
 			<Provider store={store}>
 				<Router>
 					<AppNavbar />
-					<div
-						className='container-fluid'
-						style={{
-							marginTop: '1em'
-						}}>
+					<Route exact path='/Playlist' component={Playlist} />
+					<div className='container-fluid'>
 						<div>
 							<SearchBar onFormSubmit={this.handleSubmit} />
 						</div>
@@ -73,9 +69,6 @@ class App extends Component {
 							</div>
 						</div>
 					</div>
-					<Switch>
-						<Route path='/Playlist' component={PlayList} />
-					</Switch>
 				</Router>
 			</Provider>
 		);
