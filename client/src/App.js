@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import youtube from './API/Youtube';
 
 import './App.css';
-import {
-	SaveVideo,
-	SearchBar,
-	AppNavbar,
-	VideoDetail,
-	VideoList
-} from './components';
+import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
 import Playlist from './components/pages/Playlist';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -21,7 +15,7 @@ class App extends Component {
 		selectedVideo: null
 	};
 
-	componentDidMount(props) {
+	componentDidMount() {
 		store.dispatch(loadUser());
 		this.handleSubmit('React tutorials');
 	}
@@ -41,10 +35,20 @@ class App extends Component {
 				q: searchTerm
 			}
 		});
-		console.log(response);
+
+		let videoItems = response.data.items.map(i => {
+			const { thumbnails, title, description } = i.snippet;
+			const video = {
+				videoId: i.id.videoId,
+				url: thumbnails.medium.url,
+				title,
+				description
+			};
+			return video;
+		});
 		this.setState({
-			videos: response.data.items,
-			selectedVideo: response.data.items[0]
+			videos: videoItems,
+			selectedVideo: videoItems[0]
 		});
 	};
 
@@ -62,7 +66,6 @@ class App extends Component {
 						<div className='row'>
 							<div className='video-detail col-md-8'>
 								<VideoDetail video={selectedVideo} />
-								<SaveVideo />
 							</div>
 							<div className='col-md-4 list-group'>
 								<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />

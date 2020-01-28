@@ -4,16 +4,15 @@ import axios from 'axios';
 
 class SaveVideo extends Component {
 	state = {
+		videos: [],
 		selectedVideo: '',
-		title: '',
-		description: '',
-		saveVideo: ''
+		saveVideo: []
 	};
-
 	onVideoSave = selectedVideo => {
 		this.setState({
 			saveVideo: selectedVideo
 		});
+		alert('Video Saved');
 	};
 	addVideo = async saveVideo => {
 		saveVideo.preventDefault();
@@ -37,7 +36,7 @@ class SaveVideo extends Component {
 	render() {
 		return (
 			<Button variant='outline-dark' type='submit' onClick={this.addVideo}>
-				Save Video
+				Save
 			</Button>
 		);
 	}
