@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
 	const userId = '5e1e6c078bd03303a274ba33';
 	db.Video.find({ userId })
 		.then(dbVideos => res.json(dbVideos))

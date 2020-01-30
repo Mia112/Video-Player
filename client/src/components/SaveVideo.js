@@ -8,6 +8,7 @@ class SaveVideo extends Component {
 		selectedVideo: '',
 		saveVideo: []
 	};
+
 	onVideoSave = selectedVideo => {
 		this.setState({
 			saveVideo: selectedVideo

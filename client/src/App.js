@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import youtube from './API/Youtube';
-
 import './App.css';
 import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
 import Playlist from './components/pages/Playlist';
@@ -59,20 +58,20 @@ class App extends Component {
 				<Router>
 					<AppNavbar />
 					<Route exact path='/Playlist' component={Playlist} />
-					<div className='container-fluid'>
-						<div>
-							<SearchBar onFormSubmit={this.handleSubmit} />
+				</Router>
+				<div className='container-fluid'>
+					<div>
+						<SearchBar onFormSubmit={this.handleSubmit} />
+					</div>
+					<div className='row'>
+						<div className='video-detail col-md-8'>
+							<VideoDetail video={selectedVideo} />
 						</div>
-						<div className='row'>
-							<div className='video-detail col-md-8'>
-								<VideoDetail video={selectedVideo} />
-							</div>
-							<div className='col-md-4 list-group'>
-								<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
-							</div>
+						<div className='col-md-4 list-group'>
+							<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
 						</div>
 					</div>
-				</Router>
+				</div>
 			</Provider>
 		);
 	}
