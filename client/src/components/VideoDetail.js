@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+import API from '../utils/API';
 
 const VideoDetail = ({ video }) => {
 	const handleSave = async () => {
 		// debugger;
-		const result = await axios.post('http://localhost:8080/api/Video', video);
-		console.log(result);
+		const result = await API.saveVideo(video);
 	};
+	console.log(handleSave);
 	if (!video) return <div>Loading video...</div>;
 	const videoSrc = `https://www.youtube.com/embed/${video.videoId}`;
 
@@ -27,7 +27,7 @@ const VideoDetail = ({ video }) => {
 					</div>
 				</div>
 			</div>
-			<Button variant='outline-dark' type='submit' onClick={handleSave}>
+			<Button variant='outline-dark' onClick={handleSave}>
 				Save Video
 			</Button>
 		</>

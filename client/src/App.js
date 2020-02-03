@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import youtube from './API/Youtube';
+import API from './utils/API';
+
 import './App.css';
 import { SearchBar, AppNavbar, VideoDetail, VideoList } from './components';
-import Playlist from './components/pages/Playlist';
+// import Playlist from './components/pages/Playlist';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
 	state = {
@@ -26,16 +27,10 @@ class App extends Component {
 	};
 
 	handleSubmit = async searchTerm => {
-		const response = await youtube.get('search', {
-			params: {
-				part: 'snippet',
-				maxResults: 5,
-				key: 'AIzaSyDg7arbjgsAKEij1dEAJONeKoNFX005rbs',
-				q: searchTerm
-			}
-		});
+		const search = searchTerm || 'React';
+		const response = await API.getYoutubeVideos(search);
 
-		let videoItems = response.data.items.map(i => {
+		const videoItems = response.data.items.map(i => {
 			const { thumbnails, title, description } = i.snippet;
 			const video = {
 				videoId: i.id.videoId,
@@ -57,7 +52,6 @@ class App extends Component {
 			<Provider store={store}>
 				<Router>
 					<AppNavbar />
-					<Route exact path='/Playlist' component={Playlist} />
 				</Router>
 				<div className='container-fluid'>
 					<div>
