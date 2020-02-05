@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import {
 	Collapse,
 	Navbar,
@@ -35,14 +36,19 @@ class AppNavbar extends Component {
 			<Fragment>
 				<NavItem>
 					<NavLink onClick={this.toggle} href='/Playlist'>
-						View Saved Video
+						Playlist
 					</NavLink>
 				</NavItem>
-				<span className='navbar-text mr-1'>
-					<strong>{user ? `Welcome ${user.name}` : ''}</strong>
-				</span>
 				<NavItem>
-					<Logout />
+					<DropdownButton
+						variant='outline-light'
+						title={<strong>{user ? `${user.name}` : ''}</strong>}
+						id='input-group-dropdown-2'>
+						<Dropdown.Item>
+							<Logout />
+						</Dropdown.Item>
+						<Dropdown.Item href='/'>Home</Dropdown.Item>
+					</DropdownButton>
 				</NavItem>
 			</Fragment>
 		);

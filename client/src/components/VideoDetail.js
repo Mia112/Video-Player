@@ -4,9 +4,7 @@ import API from '../utils/API';
 
 const VideoDetail = ({ video }) => {
 	const handleSave = async () => {
-		// debugger;
 		const result = await API.saveVideo(video);
-		console.log(result);
 	};
 
 	if (!video) return <div>Loading video...</div>;

@@ -16,7 +16,6 @@ router.post('/', auth, (req, res) => {
 	db.Video.create(newVideo)
 		.then(dbVideos => res.json(dbVideos))
 		.catch(err => res.json(err));
-	console.log(newVideo);
 });
 router.delete('/:id', auth, (req, res) => {
 	// Make sure user delete only their own video
