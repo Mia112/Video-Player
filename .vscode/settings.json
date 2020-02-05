@@ -1,9 +1,0 @@
-{
-    "git.ignoreLimitWarning": true,
-    "eslint.enable": false,
-    "prettier.jsxBracketSameLine": true,
-    "prettier.jsxSingleQuote": true,
-    "prettier.singleQuote": true,
-    "prettier.useTabs": true,
-    "editor.formatOnSave": true
-}

@@ -61,19 +61,10 @@ export const register = ({ name, email, password }) => dispatch => {
 		});
 };
 
-export const login = ({ email, password }) => dispatch => {
-	const config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-
-	const body = JSON.stringify({
-		email,
-		password
-	});
+export const login = data => dispatch => {
+	// debugger;
 	axios
-		.post('/api/auth', body, config)
+		.post('/api/auth', data)
 		.then(res =>
 			dispatch({
 				type: LOGIN_SUCCESS,
@@ -98,7 +89,7 @@ export const logout = () => {
 export const tokenConfig = getState => {
 	// Get token from localstorage
 	const token = getState().auth.token;
-
+	console.log(token);
 	const config = {
 		headers: {
 			'Content-type': 'application/json'

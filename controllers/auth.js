@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/user', auth, (req, res) => {
-	db.User.findById(req.user.id)
+	db.User.findById(req.user)
 		.select('-password')
 		.then(user => res.json(user));
 });

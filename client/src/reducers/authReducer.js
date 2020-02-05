@@ -32,11 +32,14 @@ export default function(state = initialState, action) {
 		case LOGIN_SUCCESS:
 		case REGISTER_SUCCESS:
 			localStorage.setItem('token', action.payload.token);
+			const token = localStorage.getItem('token');
+			// debugger;
 			return {
 				...state,
 				...action.payload,
 				isAuthenticated: true,
-				isLoading: false
+				isLoading: false,
+				token
 			};
 		case AUTH_ERROR:
 		case LOGIN_FAIL:
