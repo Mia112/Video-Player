@@ -5,9 +5,9 @@ function auth(req, res, next) {
 	if (!token) return res.status(401).json({ msg: 'Authorizaton denied' });
 
 	try {
-		const decoded = jwt.verify(token.user, config.get('jwtSecret'));
-		req.user = decoded.user;
-
+		const decoded = jwt.verify(token, config.get('jwtSecret'));
+		req.user = decoded.id;
+		console.log(decoded.id);
 		next();
 	} catch (e) {
 		res.status(400).json({ msg: 'Token is not valid' });

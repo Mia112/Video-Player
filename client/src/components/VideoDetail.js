@@ -6,8 +6,9 @@ const VideoDetail = ({ video }) => {
 	const handleSave = async () => {
 		// debugger;
 		const result = await API.saveVideo(video);
+		console.log(result);
 	};
-	console.log(handleSave);
+
 	if (!video) return <div>Loading video...</div>;
 	const videoSrc = `https://www.youtube.com/embed/${video.videoId}`;
 

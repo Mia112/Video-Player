@@ -26,10 +26,10 @@ const API = {
 	},
 	async saveVideo(data) {
 		return await axios.post('/api/Video', data);
+	},
+	async getVideo(id) {
+		return await axios.get('/api/videos', id);
 	}
-	// async getVideo(id) {
-	// 	return await axios.get('/api/videos', id);
-	// }
 };
 
 export default API;
