@@ -1,10 +1,8 @@
-import API from '../../utils/API';
-import { SearchBar, AppNavbar } from '../index';
 import React from 'react';
 import { Component } from 'react';
-import { Provider } from 'react-redux';
-import store from '../../store';
-import { loadUser } from '../../actions/authActions';
+import API from '../../utils/API';
+import { AppNavbar, VideoList } from '../index';
+import { Jumbotron, Container } from 'react-bootstrap';
 
 class Playlist extends Component {
 	constructor(props) {
@@ -13,30 +11,33 @@ class Playlist extends Component {
 			videos: []
 		};
 	}
-
 	componentDidMount() {
-		store.dispatch(loadUser());
-		this.getSavedVideos();
+		this.handleGetVideos();
 	}
 
-	getSavedVideos = () => {
-		API.getSavedVideos()
+	handleGetVideos = userId => {
+		API.getSavedVideos(userId)
 			.then(res => {
 				this.setState({
-					listOfVideos: res.data
+					videos: res.data
 				});
+				console.log(res.data);
 			})
 			.catch(err => console.log(err));
 	};
-
 	render() {
 		return (
-			<Provider store={store}>
+			<>
 				<AppNavbar />
-				<SearchBar />
-			</Provider>
+				<Jumbotron fluid style={{ marginTop: '3rem' }}>
+					<Container>
+						<div className='container-fluid'>
+							<VideoList videos={this.state.videos} />
+						</div>
+					</Container>
+				</Jumbotron>
+			</>
 		);
 	}
 }
-
 export default Playlist;

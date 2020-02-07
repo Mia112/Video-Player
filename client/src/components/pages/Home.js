@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
-import { SearchBar, AppNavbar, VideoDetail, VideoList } from '../index';
-import { Provider } from 'react-redux';
-import store from '../../store';
-import { loadUser } from '../../actions/authActions';
+import { SearchBar, VideoDetail, VideoList } from '../index';
 
-class App extends Component {
+class Home extends Component {
 	state = {
 		videos: [],
 		selectedVideo: null
 	};
-
-	componentDidMount() {
-		store.dispatch(loadUser());
-		this.handleSubmit('React tutorials');
-	}
 
 	onVideoSelect = video => {
 		this.setState({
 			selectedVideo: video
 		});
 	};
+	componentDidMount() {
+		this.handleSubmit('React tutorials');
+	}
 
 	handleSubmit = async searchTerm => {
 		const search = searchTerm || 'React';
@@ -45,14 +40,12 @@ class App extends Component {
 	render() {
 		const { selectedVideo, videos } = this.state;
 		return (
-			<Provider store={store}>
-				<AppNavbar />
-
+			<>
 				<div className='container-fluid'>
 					<div>
 						<SearchBar onFormSubmit={this.handleSubmit} />
 					</div>
-					<div className='row'>
+					<div className='row' style={{ padding: '10px', marginTop: '3rem' }}>
 						<div className='video-detail col-md-8'>
 							<VideoDetail video={selectedVideo} />
 						</div>
@@ -61,8 +54,8 @@ class App extends Component {
 						</div>
 					</div>
 				</div>
-			</Provider>
+			</>
 		);
 	}
 }
-export default App;
+export default Home;
