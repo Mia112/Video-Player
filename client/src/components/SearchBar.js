@@ -19,7 +19,7 @@ class SearchBar extends Component {
 	};
 	render() {
 		return (
-			<Paper style={{ padding: '30px', marginTop: '6rem' }}>
+			<Paper style={{ padding: '20px', marginTop: '6rem' }}>
 				<form onSubmit={this.handleSubmit}>
 					<TextField fullWidth label='Search' onChange={this.handleChange} />
 					<Button variant='outline-dark' type='submit'>

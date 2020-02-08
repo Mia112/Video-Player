@@ -5,14 +5,16 @@ const auth = require('../middleware/auth');
 
 //Get all videos
 router.get('/', auth, (req, res) => {
-	db.Video.find({ userId: req.user })
+	let userId = req.userId;
+	db.Video.find({ userId })
 		.then(dbVideos => res.json(dbVideos))
 		.catch(err => res.json(err));
 });
 
 //Create video
 router.post('/', auth, (req, res) => {
-	const newVideo = { userId: req.user, ...req.body };
+	let userId = req.userId;
+	const newVideo = { userId, ...req.body };
 	db.Video.create(newVideo)
 		.then(dbVideos => res.json(dbVideos))
 		.catch(err => res.json(err));

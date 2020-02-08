@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import API from '../../utils/API';
 import { AppNavbar, VideoList } from '../index';
-import { Jumbotron, Container } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 
 class Playlist extends Component {
 	constructor(props) {
@@ -15,8 +15,8 @@ class Playlist extends Component {
 		this.handleGetVideos();
 	}
 
-	handleGetVideos = userId => {
-		API.getSavedVideos(userId)
+	handleGetVideos = () => {
+		API.getSavedVideos()
 			.then(res => {
 				this.setState({
 					videos: res.data
@@ -30,11 +30,11 @@ class Playlist extends Component {
 			<>
 				<AppNavbar />
 				<Jumbotron fluid style={{ marginTop: '3rem' }}>
-					<Container>
-						<div className='container-fluid'>
+					<div className='card-group' style={{ display: 'flex' }}>
+						<div className='card'>
 							<VideoList videos={this.state.videos} />
 						</div>
-					</Container>
+					</div>
 				</Jumbotron>
 			</>
 		);
