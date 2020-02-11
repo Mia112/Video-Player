@@ -20,12 +20,12 @@ router.post('/', auth, (req, res) => {
 		.catch(err => res.json(err));
 });
 router.delete('/:id', auth, (req, res) => {
+	let userId = req.userId;
 	// Make sure user delete only their own video
-	if (dbVideos.userId.toString() !== req.user)
+	if (dbVideos.userId.toString() !== userId)
 		return res.status(401).json({ msg: 'Not authorized' });
-	db.Video.findByIdAndDelete(req.params.id)
+	db.Video.findById({ _id: req.params.id })
 		.then(dbVideo => res.json(dbVideo))
-		.catch(err => res.json(err));
+		.catch(err => res.status(422).json(err));
 });
-
 module.exports = router;

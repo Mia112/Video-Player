@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import API from '../../utils/API';
-import { AppNavbar, VideoList } from '../index';
+import { AppNavbar, VideoList, DeleteBtn } from '../index';
 import { Jumbotron } from 'react-bootstrap';
 
 class Playlist extends Component {
@@ -25,6 +25,12 @@ class Playlist extends Component {
 			})
 			.catch(err => console.log(err));
 	};
+	handleVideoDelete = id => {
+		API.deleteVideo(id)
+			.then(res => this.handleGetVideos())
+			.catch(err => console.log(err));
+	};
+
 	render() {
 		return (
 			<>
@@ -32,7 +38,9 @@ class Playlist extends Component {
 				<Jumbotron fluid style={{ marginTop: '3rem' }}>
 					<div className='card-group' style={{ display: 'flex' }}>
 						<div className='card'>
-							<VideoList videos={this.state.videos} />
+							<VideoList videos={this.state.videos}>
+								<DeleteBtn onClick={this.handleVideoDelete} />
+							</VideoList>
 						</div>
 					</div>
 				</Jumbotron>

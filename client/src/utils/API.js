@@ -18,19 +18,21 @@ const API = {
 		};
 		return await youtube.get('search', data);
 	},
-	//call to get video playlist
-	async getSavedVideos() {
-		return await axios.get('/api/Video');
-	},
-
-	async deleteVideo(id) {
-		return await axios.delete('/' + id);
-	},
+	// Saves a video to the database
 	async saveVideo(data) {
 		return await axios.post('/api/Video', data);
 	},
+	//Gets all Videos
+	async getSavedVideos() {
+		return await axios.get('/api/Video');
+	},
+	// Deletes a video with the given id
+	async deleteVideo(id) {
+		return await axios.delete('/api/Video', +id);
+	},
+	// Get a single video with the given id
 	async getVideo(id) {
-		return await axios.get('/api/videos', id);
+		return await axios.get('/api/Video', +id);
 	}
 };
 
