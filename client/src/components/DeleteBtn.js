@@ -7,7 +7,7 @@ function DeleteBtn(props) {
 			role='button'
 			tabIndex='0'
 			style={{ float: 'right', color: '#e74944' }}>
-			✗
+			Delet
 		</span>
 	);
 }
