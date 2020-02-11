@@ -10,6 +10,7 @@ const API = {
 		const data = {
 			params: {
 				part: 'snippet',
+
 				maxResults: 5,
 				key: 'AIzaSyDg7arbjgsAKEij1dEAJONeKoNFX005rbs',
 				q: searchTerm
@@ -19,8 +20,9 @@ const API = {
 	},
 	//call to get video playlist
 	async getSavedVideos() {
-		return await axios.get('/api/videos');
+		return await axios.get('/api/Video');
 	},
+
 	async deleteVideo(id) {
 		return await axios.delete('/' + id);
 	},

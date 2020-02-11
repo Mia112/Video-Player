@@ -5,21 +5,23 @@ const auth = require('../middleware/auth');
 
 //Get all videos
 router.get('/', auth, (req, res) => {
-	db.Video.find({ user: req.user })
+	let userId = req.userId;
+	db.Video.find({ userId })
 		.then(dbVideos => res.json(dbVideos))
 		.catch(err => res.json(err));
 });
 
 //Create video
 router.post('/', auth, (req, res) => {
-	const newVideo = { user: req.user, ...req.body };
+	let userId = req.userId;
+	const newVideo = { userId, ...req.body };
 	db.Video.create(newVideo)
 		.then(dbVideos => res.json(dbVideos))
 		.catch(err => res.json(err));
 });
 router.delete('/:id', auth, (req, res) => {
 	// Make sure user delete only their own video
-	if (dbVideos.user.toString() !== req.user)
+	if (dbVideos.userId.toString() !== req.user)
 		return res.status(401).json({ msg: 'Not authorized' });
 	db.Video.findByIdAndDelete(req.params.id)
 		.then(dbVideo => res.json(dbVideo))

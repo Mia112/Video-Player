@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const VideoSchema = new Schema({
-	videoId: String,
+	videoId: {
+		type: String,
+		required: true
+	},
 
 	title: {
 		type: String,
@@ -16,7 +19,7 @@ const VideoSchema = new Schema({
 		type: String,
 		required: true
 	},
-	user: {
+	userId: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}

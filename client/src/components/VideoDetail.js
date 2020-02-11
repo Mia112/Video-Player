@@ -5,6 +5,7 @@ import API from '../utils/API';
 const VideoDetail = ({ video }) => {
 	const handleSave = async () => {
 		const result = await API.saveVideo(video);
+		if (result) alert('Video is added to your Playlist');
 	};
 
 	if (!video) return <div>Loading video...</div>;
@@ -23,12 +24,12 @@ const VideoDetail = ({ video }) => {
 					<div className='details'>
 						<div>{video.title}</div>
 						<div>{video.description}</div>
+						<Button variant='outline-dark' onClick={handleSave}>
+							Save Video
+						</Button>
 					</div>
 				</div>
 			</div>
-			<Button variant='outline-dark' onClick={handleSave}>
-				Save Video
-			</Button>
 		</>
 	);
 };
