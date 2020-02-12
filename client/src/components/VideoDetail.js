@@ -10,6 +10,7 @@ const VideoDetail = ({ video }) => {
 
 	if (!video) return <div>Loading video...</div>;
 	const videoSrc = `https://www.youtube.com/embed/${video.videoId}`;
+
 	const { isAuthenticated } = this.props.auth;
 	return (
 		<>
