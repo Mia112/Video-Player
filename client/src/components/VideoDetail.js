@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import SaveVideoBtn from '../components/SaveVideoBtn';
 import API from '../utils/API';
-
+import { connect } from 'react-redux';
 const VideoDetail = ({ video }) => {
 	const handleSave = async () => {
 		const result = await API.saveVideo(video);
@@ -10,7 +10,7 @@ const VideoDetail = ({ video }) => {
 
 	if (!video) return <div>Loading video...</div>;
 	const videoSrc = `https://www.youtube.com/embed/${video.videoId}`;
-
+	const { isAuthenticated } = this.props.auth;
 	return (
 		<>
 			<div className='flex-row'>
@@ -24,14 +24,18 @@ const VideoDetail = ({ video }) => {
 					<div className='details'>
 						<div>{video.title}</div>
 						<div>{video.description}</div>
-						<Button variant='outline-dark' onClick={handleSave}>
-							Save Video
-						</Button>
+
+						<div>
+							{isAuthenticated ? <SaveVideoBtn onClick={handleSave} /> : ''}
+						</div>
 					</div>
 				</div>
 			</div>
 		</>
 	);
 };
+const mapStateToProps = state => ({
+	auth: state.auth
+});
 
-export default VideoDetail;
+export default connect(mapStateToProps, null)(VideoDetail);

@@ -14,11 +14,11 @@ class Home extends Component {
 		});
 	};
 	componentDidMount() {
-		this.handleSubmit('MERN Stack');
+		this.handleSubmit('React tutorials');
 	}
 
 	handleSubmit = async searchTerm => {
-		const search = searchTerm || 'Coding';
+		const search = searchTerm || 'React';
 		const response = await API.getYoutubeVideos(search);
 
 		const videoItems = response.data.items.map(i => {

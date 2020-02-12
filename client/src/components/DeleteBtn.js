@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DeleteBtn(props) {
+const DeleteBtn = props => {
 	return (
 		<span
 			{...props}
@@ -10,6 +10,6 @@ function DeleteBtn(props) {
 			Delet
 		</span>
 	);
-}
+};
 
 export default DeleteBtn;
