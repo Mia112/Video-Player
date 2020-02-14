@@ -25,10 +25,11 @@ class Playlist extends Component {
 			})
 			.catch(err => console.log(err));
 	};
-	handleVideoDelete = id => {
+	handleVideoDelete = ({ id, onDelete }) => {
 		API.deleteVideo(id)
 			.then(res => this.handleGetVideos())
 			.catch(err => console.log(err));
+		onDelete(id);
 	};
 
 	render() {
