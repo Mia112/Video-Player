@@ -38,9 +38,8 @@ class Playlist extends Component {
 				<Jumbotron fluid style={{ marginTop: '3rem' }}>
 					<div className='card-group' style={{ display: 'flex' }}>
 						<div className='card'>
-							<VideoList videos={this.state.videos}>
-								<DeleteBtn onClick={this.handleVideoDelete} />
-							</VideoList>
+							<VideoList videos={this.state.videos}></VideoList>
+							<DeleteBtn onClick={this.handleVideoDelete} />
 						</div>
 					</div>
 				</Jumbotron>

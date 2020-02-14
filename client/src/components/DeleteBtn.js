@@ -1,14 +1,13 @@
 import React from 'react';
-
+import Button from 'react-bootstrap/Button';
 const DeleteBtn = props => {
 	return (
-		<span
+		<Button
 			{...props}
-			role='button'
-			tabIndex='0'
+			variant='outline-dark'
 			style={{ float: 'right', color: '#e74944' }}>
-			Delet
-		</span>
+			Delete
+		</Button>
 	);
 };
 
