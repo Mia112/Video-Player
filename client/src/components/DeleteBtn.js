@@ -1,17 +1,10 @@
 import React from 'react';
-
-const DeleteBtn = ({ onDelete }) => {
-	onDelete = id => {
-		this.setState(state => {
-			const { videos } = state;
-			const filteredItems = videos.filter(video => video.id !== id);
-			return { videos: filteredItems };
-		});
-	};
+import Button from 'react-bootstrap/Button';
+const DeleteBtn = props => {
 	return (
-		<div>
-			<button onClick={onDelete}>X</button>
-		</div>
+		<Button {...props} variant='outline-dark'>
+			Delete
+		</Button>
 	);
 };
 

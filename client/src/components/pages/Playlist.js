@@ -1,7 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 import API from '../../utils/API';
-import { AppNavbar, VideoList, DeleteBtn } from '../index';
+import { AppNavbar } from '../index';
+import PlaylistVideos from '../PlaylistVideos';
 import { Jumbotron } from 'react-bootstrap';
 
 class Playlist extends Component {
@@ -10,9 +11,6 @@ class Playlist extends Component {
 		this.state = {
 			videos: []
 		};
-	}
-	componentDidMount() {
-		this.handleGetVideos();
 	}
 
 	handleGetVideos = () => {
@@ -25,12 +23,16 @@ class Playlist extends Component {
 			})
 			.catch(err => console.log(err));
 	};
-	handleVideoDelete = ({ id, onDelete }) => {
-		API.deleteVideo(id)
+
+	deleteVideo = event => {
+		API.deleteVideo(event.target.id)
 			.then(res => this.handleGetVideos())
 			.catch(err => console.log(err));
-		onDelete(id);
 	};
+
+	componentDidMount() {
+		this.handleGetVideos();
+	}
 
 	render() {
 		return (
@@ -39,8 +41,10 @@ class Playlist extends Component {
 				<Jumbotron fluid style={{ marginTop: '3rem' }}>
 					<div className='card-group' style={{ display: 'flex' }}>
 						<div className='card'>
-							<VideoList videos={this.state.videos}></VideoList>
-							<DeleteBtn onClick={this.handleVideoDelete} />
+							<PlaylistVideos
+								videos={this.state.videos}
+								deleteVideo={this.deleteVideo}
+							/>
 						</div>
 					</div>
 				</Jumbotron>

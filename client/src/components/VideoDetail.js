@@ -5,6 +5,7 @@ import API from '../utils/API';
 const VideoDetail = ({ video }) => {
 	const handleSave = async () => {
 		const result = await API.saveVideo(video);
+
 		if (result) alert('Video is added to your Playlist');
 	};
 

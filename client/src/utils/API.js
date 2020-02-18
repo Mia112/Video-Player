@@ -28,11 +28,11 @@ const API = {
 	},
 	// Deletes a video with the given id
 	async deleteVideo(id) {
-		return await axios.delete('/api/Video', +id);
+		return await axios.delete(`/api/Video/${id}`);
 	},
 	// Get a single video with the given id
 	async getVideo(id) {
-		return await axios.get('/api/Video', +id);
+		return await axios.get('/api/Videos', +id);
 	}
 };
 
