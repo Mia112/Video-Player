@@ -1,31 +1,36 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import API from '../../utils/API';
-import { AppNavbar } from '../index';
-import PlaylistVideos from '../PlaylistVideos';
-import { Jumbotron } from 'react-bootstrap';
+import { VideoDetail, VideoList, AppNavbar } from '../index';
 
 class Playlist extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			videos: []
+			videos: [],
+			selectedVideo: ''
 		};
 	}
+	onVideoSelect = video => {
+		this.setState({
+			selectedVideo: video
+		});
+	};
 
 	handleGetVideos = () => {
 		API.getSavedVideos()
 			.then(res => {
 				this.setState({
-					videos: res.data
+					videos: res.data,
+					selectedVideo: res.data[0]
 				});
 				console.log(res.data);
 			})
 			.catch(err => console.log(err));
 	};
 
-	deleteVideo = event => {
-		API.deleteVideo(event.target.id)
+	deleteVideo = (event, id) => {
+		event.preventDefault();
+		API.deleteVideo(id)
 			.then(res => this.handleGetVideos())
 			.catch(err => console.log(err));
 	};
@@ -33,21 +38,25 @@ class Playlist extends Component {
 	componentDidMount() {
 		this.handleGetVideos();
 	}
-
 	render() {
+		const { selectedVideo, videos } = this.state;
 		return (
 			<>
 				<AppNavbar />
-				<Jumbotron fluid style={{ marginTop: '3rem' }}>
-					<div className='card-group' style={{ display: 'flex' }}>
-						<div className='card'>
-							<PlaylistVideos
-								videos={this.state.videos}
-								deleteVideo={this.deleteVideo}
-							/>
+				<div className='container-fluid'>
+					<div className='row' style={{ padding: '10px', marginTop: '3rem' }}>
+						<div className='video-detail col-md-8'>
+							<VideoDetail
+								video={selectedVideo}
+								handleAction={this.deleteVideo}
+								text='Delete'></VideoDetail>
+						</div>
+
+						<div className='col-md-4 list-group'>
+							<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
 						</div>
 					</div>
-				</Jumbotron>
+				</div>
 			</>
 		);
 	}

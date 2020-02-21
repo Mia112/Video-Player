@@ -26,7 +26,7 @@ const API = {
 	async getSavedVideos() {
 		return await axios.get('/api/Video');
 	},
-	// Deletes a video with the given id
+
 	async deleteVideo(id) {
 		return await axios.delete(`/api/Video/${id}`);
 	},

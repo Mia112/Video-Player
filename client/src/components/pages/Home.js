@@ -5,7 +5,7 @@ import { SearchBar, VideoDetail, VideoList } from '../index';
 class Home extends Component {
 	state = {
 		videos: [],
-		selectedVideo: null
+		selectedVideo: ''
 	};
 
 	onVideoSelect = video => {
@@ -36,6 +36,11 @@ class Home extends Component {
 			selectedVideo: videoItems[0]
 		});
 	};
+	handleSave = async video => {
+		const result = await API.saveVideo(video);
+
+		if (result) alert('Video is added to your Playlist');
+	};
 
 	render() {
 		const { selectedVideo, videos } = this.state;
@@ -47,7 +52,10 @@ class Home extends Component {
 					</div>
 					<div className='row' style={{ padding: '10px', marginTop: '3rem' }}>
 						<div className='video-detail col-md-8'>
-							<VideoDetail video={selectedVideo} />
+							<VideoDetail
+								video={selectedVideo}
+								handleAction={this.handleSave}
+								text={'Save'}></VideoDetail>
 						</div>
 						<div className='col-md-4 list-group'>
 							<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
