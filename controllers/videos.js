@@ -20,7 +20,7 @@ router.post('/', auth, (req, res) => {
 		.catch(err => res.json(err));
 });
 
-router.delete('/Playlist/:id', auth, (req, res) => {
+router.delete('/:id', auth, (req, res) => {
 	let userId = req.userId;
 	// Make sure user delete only their own video
 	if (dbVideos.userId.toString() !== userId)
@@ -29,4 +29,5 @@ router.delete('/Playlist/:id', auth, (req, res) => {
 		.then(dbVideo => res.json(dbVideo))
 		.catch(err => res.status(422).json(err));
 });
+
 module.exports = router;

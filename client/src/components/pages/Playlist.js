@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
-import { VideoDetail, VideoList, AppNavbar } from '../index';
+import { DeleteVideo, VideoList, AppNavbar } from '../index';
 
 class Playlist extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			videos: [],
-			selectedVideo: ''
-		};
+	state = {
+		videos: [],
+		selectedVideo: ''
+	};
+
+	componentDidMount() {
+		this.handleGetVideos();
 	}
 	onVideoSelect = video => {
 		this.setState({
@@ -16,40 +17,48 @@ class Playlist extends Component {
 		});
 	};
 
-	handleGetVideos = () => {
-		API.getSavedVideos()
-			.then(res => {
-				this.setState({
-					videos: res.data,
-					selectedVideo: res.data[0]
-				});
-				console.log(res.data);
-			})
-			.catch(err => console.log(err));
+	// onVideoDelete = selectedVideo => {
+	// 	this.setState({
+	// 		deletedVideo: selectedVideo
+	// 	});
+	// };
+
+	handleGetVideos = async () => {
+		try {
+			const res = await API.getSavedVideos();
+			this.setState({
+				videos: res.data,
+				selectedVideo: res.data[0]
+			});
+		} catch (error) {
+			alert('Could not get videos');
+		}
 	};
 
-	deleteVideo = (event, id) => {
-		event.preventDefault();
-		API.deleteVideo(id)
-			.then(res => this.handleGetVideos())
-			.catch(err => console.log(err));
-	};
-
-	componentDidMount() {
-		this.handleGetVideos();
-	}
+	// handleDelete = async selectedVideo => {
+	// 	try {
+	// 		await API.deleteVideo(selectedVideo);
+	// 		// console.log();
+	// 		alert('Video has been removed');
+	// 		this.handleGetVideos();
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 		alert('Failed to create: ' + err.message);
+	// 	}
+	// };
 	render() {
 		const { selectedVideo, videos } = this.state;
+
 		return (
 			<>
 				<AppNavbar />
 				<div className='container-fluid'>
 					<div className='row' style={{ padding: '10px', marginTop: '3rem' }}>
 						<div className='video-detail col-md-8'>
-							<VideoDetail
+							<DeleteVideo
 								video={selectedVideo}
-								handleAction={this.deleteVideo}
-								text='Delete'></VideoDetail>
+								onClick={this.handleDelete}
+								onVideoDelete={this.onVideoDelete}></DeleteVideo>
 						</div>
 
 						<div className='col-md-4 list-group'>
@@ -61,4 +70,5 @@ class Playlist extends Component {
 		);
 	}
 }
+
 export default Playlist;
