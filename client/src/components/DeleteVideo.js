@@ -1,17 +1,6 @@
 import React from 'react';
-import API from '../utils/API';
-const DeleteVideo = ({ video, selectedVideo, onVideoDelete }) => {
-	const handleDelete = async selectedVideo => {
-		try {
-			await API.deleteVideo(selectedVideo._id);
-			// console.log();
-			alert('Video has been removed');
-			this.handleGetVideos();
-		} catch (err) {
-			console.log(err);
-			alert('Failed to create: ' + err.message);
-		}
-	};
+
+const DeleteVideo = ({ video, handleAction }) => {
 	if (!video)
 		return (
 			<div>
@@ -34,7 +23,7 @@ const DeleteVideo = ({ video, selectedVideo, onVideoDelete }) => {
 						<div>{video.title}</div>
 						<div>{video.description}</div>
 
-						<button onClick={handleDelete} className='btn btn-danger'>
+						<button onClick={handleAction} className='btn btn-danger'>
 							Delete
 						</button>
 					</div>
