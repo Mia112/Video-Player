@@ -1,43 +1,87 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import API from '../../utils/API';
-import { AppNavbar, VideoList } from '../index';
-import { Jumbotron } from 'react-bootstrap';
+import { DeleteVideo, VideoList } from '../index';
 
 class Playlist extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			videos: []
-		};
-	}
+	state = {
+		videos: [],
+		selectedVideo: ''
+	};
+
 	componentDidMount() {
 		this.handleGetVideos();
 	}
+	onVideoSelect = video => {
+		this.setState({
+			selectedVideo: video
+		});
+	};
 
-	handleGetVideos = () => {
-		API.getSavedVideos()
-			.then(res => {
-				this.setState({
-					videos: res.data
-				});
-				console.log(res.data);
-			})
-			.catch(err => console.log(err));
+	handleGetVideos = async () => {
+		try {
+			const res = await API.getSavedVideos();
+			this.setState({
+				videos: res.data,
+				selectedVideo: res.data[0]
+			});
+		} catch (error) {
+			alert('Could not get videos');
+		}
+	};
+
+	handleGetVideos = async () => {
+		try {
+			const res = await API.getSavedVideos();
+			this.setState({
+				videos: res.data,
+				selectedVideo: res.data[0]
+			});
+		} catch (error) {
+			alert('Could not get videos');
+		}
+	};
+
+	removeVideo = async event => {
+		event.preventDefault();
+		const id = event.target.id;
+		const videoToRemove = this.state.videos[0]._id;
+		try {
+			const response = await API.deleteVideo(videoToRemove);
+
+			console.log(response);
+			alert('Video has been removed');
+			this.handleGetVideos();
+		} catch (err) {
+			console.log(err);
+			alert('Failed to create: ' + err.message);
+		}
+		let newVideoList = Array.from(this.state.videos);
+		if (id !== -1) {
+			newVideoList.splice(id, 0);
+			this.setState({ videos: newVideoList });
+		}
 	};
 	render() {
+		const { selectedVideo, videos } = this.state;
+
 		return (
 			<>
-				<AppNavbar />
-				<Jumbotron fluid style={{ marginTop: '3rem' }}>
-					<div className='card-group' style={{ display: 'flex' }}>
-						<div className='card'>
-							<VideoList videos={this.state.videos} />
+				<div className='container-fluid'>
+					<div className='row' style={{ padding: '20px', marginTop: '5rem' }}>
+						<div className='video-detail col-md-8'>
+							<DeleteVideo
+								video={selectedVideo}
+								handleAction={this.removeVideo}></DeleteVideo>
+						</div>
+
+						<div className='col-md-4 list-group'>
+							<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
 						</div>
 					</div>
-				</Jumbotron>
+				</div>
 			</>
 		);
 	}
 }
+
 export default Playlist;

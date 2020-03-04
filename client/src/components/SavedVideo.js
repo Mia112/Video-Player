@@ -1,8 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import API from '../utils/API';
 
-const VideoDetail = ({ video }) => {
+const SavedVideo = ({ video }) => {
 	const handleSave = async () => {
 		const result = await API.saveVideo(video);
 		if (result) alert('Video is added to your Playlist');
@@ -24,9 +23,10 @@ const VideoDetail = ({ video }) => {
 					<div className='details'>
 						<div>{video.title}</div>
 						<div>{video.description}</div>
-						<Button variant='outline-dark' onClick={handleSave}>
+
+						<button onClick={handleSave} className='btn btn-light'>
 							Save Video
-						</Button>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -34,4 +34,4 @@ const VideoDetail = ({ video }) => {
 	);
 };
 
-export default VideoDetail;
+export default SavedVideo;

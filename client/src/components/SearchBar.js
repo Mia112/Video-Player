@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import { Paper, TextField } from '@material-ui/core';
+// import Button from 'react-bootstrap/Button';
+// import { Paper, TextField } from '@material-ui/core';
 
 class SearchBar extends Component {
 	state = {
@@ -19,14 +19,19 @@ class SearchBar extends Component {
 	};
 	render() {
 		return (
-			<Paper style={{ padding: '20px', marginTop: '6rem' }}>
+			<div className='wrap' fixed-top>
 				<form onSubmit={this.handleSubmit}>
-					<TextField fullWidth label='Search' onChange={this.handleChange} />
-					<Button variant='outline-dark' type='submit'>
-						Search
-					</Button>
+					<input
+						onChange={this.handleChange}
+						type='text'
+						className='searchTerm'
+						placeholder='Search Video'
+					/>
+					<button type='submit' className='searchButton'>
+						<i className='fa fa-search'></i>
+					</button>
 				</form>
-			</Paper>
+			</div>
 		);
 	}
 }

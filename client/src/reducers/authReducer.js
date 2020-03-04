@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
 		case REGISTER_SUCCESS:
 			localStorage.setItem('token', action.payload.token);
 			const token = localStorage.getItem('token');
-			// debugger;
+
 			return {
 				...state,
 				...action.payload,

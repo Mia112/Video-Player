@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
-import { SearchBar, VideoDetail, VideoList } from '../index';
-
+import { SearchBar, VideoList, SavedVideo } from '../index';
 class Home extends Component {
 	state = {
 		videos: [],
@@ -42,12 +41,12 @@ class Home extends Component {
 		return (
 			<>
 				<div className='container-fluid'>
-					<div>
+					<div className='row' style={{ padding: '5px', marginTop: '5rem' }}>
 						<SearchBar onFormSubmit={this.handleSubmit} />
 					</div>
-					<div className='row' style={{ padding: '10px', marginTop: '3rem' }}>
+					<div className='row' style={{ padding: '5px', marginTop: '2rem' }}>
 						<div className='video-detail col-md-8'>
-							<VideoDetail video={selectedVideo} />
+							<SavedVideo video={selectedVideo} />
 						</div>
 						<div className='col-md-4 list-group'>
 							<VideoList videos={videos} onVideoSelect={this.onVideoSelect} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { loadUser } from './actions/authActions';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AppNavbar from './components/AppNavbar';
