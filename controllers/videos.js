@@ -30,7 +30,7 @@ router.delete('/Playlist/:id', auth, (req, res) => {
 				error: false,
 				data: response
 			});
-			if (response.userId.toString() !== userId)
+			if (response.userId !== userId)
 				return res.status(401).json({ msg: 'Not authorized' });
 		})
 		.catch(err => {

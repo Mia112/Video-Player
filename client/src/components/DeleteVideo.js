@@ -24,7 +24,7 @@ const DeleteVideo = ({ video, handleAction }) => {
 						<div>{video.description}</div>
 
 						<button onClick={handleAction} className='btn btn-danger'>
-							Delete
+							Delete Video
 						</button>
 					</div>
 				</div>

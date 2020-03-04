@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
-import { DeleteVideo, VideoList, AppNavbar } from '../index';
+import { DeleteVideo, VideoList } from '../index';
 
 class Playlist extends Component {
 	state = {
@@ -66,9 +66,8 @@ class Playlist extends Component {
 
 		return (
 			<>
-				<AppNavbar />
 				<div className='container-fluid'>
-					<div className='row' style={{ padding: '10px', marginTop: '3rem' }}>
+					<div className='row' style={{ padding: '20px', marginTop: '5rem' }}>
 						<div className='video-detail col-md-8'>
 							<DeleteVideo
 								video={selectedVideo}
