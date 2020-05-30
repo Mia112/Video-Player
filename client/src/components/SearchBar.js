@@ -1,39 +1,34 @@
-import React, { Component } from 'react';
-// import Button from 'react-bootstrap/Button';
-// import { Paper, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
 
-class SearchBar extends Component {
-	state = {
-		searchTerm: ''
+const SearchBar = (props) => {
+	const [searchTerm, setSearchValue] = useState('');
+
+	const handleSearchChange = (event) => {
+		setSearchValue(event.target.value);
 	};
-	handleChange = event => {
-		this.setState({ searchTerm: event.target.value });
+	const resetInputField = () => {
+		setSearchValue('');
 	};
-	handleSubmit = event => {
-		const { searchTerm } = this.state;
-		const { onFormSubmit } = this.props;
 
-		onFormSubmit(searchTerm);
-
+	const handleSearchSubmit = (event) => {
 		event.preventDefault();
+		props.onFormSubmit(searchTerm);
+		resetInputField();
 	};
-	render() {
-		return (
-			<div className='wrap' fixed-top>
-				<form onSubmit={this.handleSubmit}>
-					<input
-						onChange={this.handleChange}
-						type='text'
-						className='searchTerm'
-						placeholder='Search Video'
-					/>
-					<button type='submit' className='searchButton'>
-						<i className='fa fa-search'></i>
-					</button>
-				</form>
-			</div>
-		);
-	}
-}
-
+	return (
+		<div className='wrap' fixed-top>
+			<form onSubmit={handleSearchSubmit}>
+				<input
+					onChange={handleSearchChange}
+					type='text'
+					className='searchTerm'
+					placeholder='Search Video'
+				/>
+				<button type='submit' className='searchButton'>
+					<i className='fa fa-search'></i>
+				</button>
+			</form>
+		</div>
+	);
+};
 export default SearchBar;

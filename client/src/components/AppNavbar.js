@@ -9,6 +9,7 @@ import {
 	NavItem,
 	NavLink
 } from 'reactstrap';
+import logo from './logo.png';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
@@ -71,8 +72,9 @@ class AppNavbar extends Component {
 					id='topnav'
 					expand='lg'
 					className='navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar'>
+					<img src={logo} className='App-logo' alt='logo' />
 					<NavbarBrand href='/'>
-						<h3>Youtube Video App</h3>
+						<h3>Video App</h3>
 					</NavbarBrand>
 
 					<NavbarToggler onClick={this.toggle} />

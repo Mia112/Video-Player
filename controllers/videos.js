@@ -24,13 +24,13 @@ router.post('/', auth, (req, res) => {
 router.delete('/Playlist/:id', auth, (req, res) => {
 	let userId = req.userId;
 	db.Video.deleteOne({ _id: req.params.id })
-		.then(response => {
+		.then(dbVideo => {
 			res.json({
 				message: `Deleted video with id: ${req.params.id}`,
 				error: false,
-				data: response
+				data: res
 			});
-			if (response.userId !== userId)
+			if (res.userId !== userId)
 				return res.status(401).json({ msg: 'Not authorized' });
 		})
 		.catch(err => {

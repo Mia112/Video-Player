@@ -12,7 +12,7 @@ const API = {
 				part: 'snippet',
 
 				maxResults: 5,
-				key: 'AIzaSyBLj2cXejXsvSskWZpRDenflXjyuqVc8JU',
+				key: 'AIzaSyBNuV3IgUGtbN7p0RQiJ5af1992nsT1ipg',
 				q: searchTerm
 			}
 		};
